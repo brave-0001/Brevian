@@ -6,41 +6,47 @@
    ============================================================================= */
 
 :root {
+  /* Blue palette */
   --c-900: #021024;
   --c-700: #052659;
   --c-500: #5483B3;
   --c-300: #7DA0CA;
   --c-100: #C1E8FF;
 
-  --bg:         #F0F6FF;
-  --bg-alt:     #E4EFFA;
-  --text:       #021024;
-  --muted:      #4A6080;
-  --accent:     #052659;
-  --accent-lt:  #5483B3;
-  --border:     rgba(5, 38, 89, 0.10);
+  /* Semantic */
+  --bg:        #F0F6FF;
+  --bg-alt:    #E4EFFA;
+  --text:      #021024;
+  --muted:     #4A6080;
+  --accent:    #052659;
+  --accent-lt: #5483B3;
+  --border:    rgba(5, 38, 89, 0.10);
 
-  --radius:     14px;
-  --nav-h:      66px;
-  --ease:       cubic-bezier(.4, 0, .2, 1);
+  /* Layout */
+  --nav-h:  66px;
+  --radius: 14px;
 
+  /* Motion */
+  --ease: cubic-bezier(.4, 0, .2, 1);
+
+  /* Typography */
   --font-serif: 'DM Serif Display', Georgia, serif;
   --font-sans:  'DM Sans', system-ui, sans-serif;
 }
 
 .dark {
-  --bg:         #021024;
-  --bg-alt:     #052659;
-  --text:       #C1E8FF;
-  --muted:      #7DA0CA;
-  --accent:     #7DA0CA;
-  --accent-lt:  #C1E8FF;
-  --border:     rgba(193, 232, 255, 0.10);
+  --bg:        #021024;
+  --bg-alt:    #052659;
+  --text:      #C1E8FF;
+  --muted:     #7DA0CA;
+  --accent:    #7DA0CA;
+  --accent-lt: #C1E8FF;
+  --border:    rgba(193, 232, 255, 0.10);
 }
 
 
 /* =============================================================================
-   Reset & Base
+   Reset
    ============================================================================= */
 
 *, *::before, *::after {
@@ -49,13 +55,13 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
+body { overflow-x: hidden; }
 
-body {
-  overflow-x: hidden;
-}
+
+/* =============================================================================
+   Base
+   ============================================================================= */
 
 .app {
   min-height: 100vh;
@@ -65,11 +71,6 @@ body {
   font-weight: 300;
   transition: background 0.4s, color 0.4s;
 }
-
-
-/* =============================================================================
-   Layout
-   ============================================================================= */
 
 .container {
   max-width: 1080px;
@@ -87,7 +88,7 @@ body {
 
 
 /* =============================================================================
-   Reveal animation
+   Scroll reveal
    ============================================================================= */
 
 .reveal {
@@ -108,9 +109,7 @@ body {
 
 .nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto 0;
   height: var(--nav-h);
   z-index: 100;
   transition: background 0.35s, box-shadow 0.35s;
@@ -138,8 +137,8 @@ body {
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-  text-decoration: none;
   color: var(--text);
+  text-decoration: none;
 }
 
 .nav__avatar {
@@ -184,8 +183,8 @@ body {
   background: none;
   border: 1.5px solid var(--border);
   border-radius: 50%;
-  cursor: pointer;
   color: var(--muted);
+  cursor: pointer;
   transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
@@ -514,7 +513,7 @@ body {
 }
 
 .dark .tech-pill {
-  background: color-mix(in srgb, var(--c-300) 12%, var(--bg));
+  background: color-mix(in srgb, var(--c-300) 12%, var(--bg-alt));
   color: var(--c-300);
 }
 
@@ -665,7 +664,7 @@ body {
   color: var(--text);
 }
 
-.about__val.freelance {
+.about__val.open {
   color: #22c55e;
 }
 
@@ -730,6 +729,7 @@ body {
   box-shadow: 0 6px 24px color-mix(in srgb, var(--c-500) 15%, transparent);
 }
 
+/* Highlighted card (WhatsApp / phone) */
 .contact-card--highlight {
   background: var(--accent) !important;
   border-color: var(--accent) !important;
@@ -791,6 +791,7 @@ body {
 .contact-card svg:last-child {
   flex-shrink: 0;
   opacity: 0.5;
+  transition: opacity 0.2s;
 }
 
 .contact-card:hover svg:last-child {
@@ -879,7 +880,7 @@ body {
 
 @media (max-width: 900px) {
   .container { padding: 0 24px; }
-  .section    { padding: 80px 0; }
+  .section   { padding: 80px 0; }
 
   .nav__inner { padding: 0 24px; gap: 20px; }
   .nav__links { gap: 18px; }
@@ -891,31 +892,31 @@ body {
     text-align: center;
   }
 
-  .hero__text      { order: 2; display: flex; flex-direction: column; align-items: center; }
-  .hero__sub       { max-width: 100%; }
+  .hero__text       { order: 2; display: flex; flex-direction: column; align-items: center; }
+  .hero__sub        { max-width: 100%; }
   .hero__photo-wrap { order: 1; max-width: 320px; margin: 0 auto; }
 
   .tech-grid { grid-template-columns: repeat(2, 1fr); }
 
-  .project-row            { grid-template-columns: 1fr; gap: 12px; }
-  .project-row__meta      { flex-direction: row; align-items: center; }
+  .project-row       { grid-template-columns: 1fr; gap: 12px; }
+  .project-row__meta { flex-direction: row; align-items: center; }
 
   .about-grid,
-  .contact-grid           { grid-template-columns: 1fr; gap: 48px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
 
   .about__img-wrap,
-  .contact__video-wrap    { aspect-ratio: 3 / 2; }
+  .contact__video-wrap { aspect-ratio: 3 / 2; }
 
   .about-right { order: -1; }
 }
 
 @media (max-width: 580px) {
-  .container  { padding: 0 18px; }
-  .section    { padding: 60px 0; }
+  .container { padding: 0 18px; }
+  .section   { padding: 60px 0; }
 
-  .nav__links     { display: none; }
-  .tech-grid      { grid-template-columns: 1fr; }
-  .hero__scroll   { display: none; }
+  .nav__links   { display: none; }
+  .tech-grid    { grid-template-columns: 1fr; }
+  .hero__scroll { display: none; }
 
-  .footer__inner  { flex-direction: column; gap: 14px; text-align: center; }
+  .footer__inner { flex-direction: column; gap: 14px; text-align: center; }
 }
