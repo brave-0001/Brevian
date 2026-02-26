@@ -5,17 +5,13 @@ import './App.css';
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const person = {
-  name:      'Brevian Emmanuel',
-  location:  'Kibabii University, Kenya',
-  email:     'brivian179@gmail.com',
-  phone:     '+254 727 611 362',
-  whatsapp:  '254727611362',
-  github:    'brave-0001',
-
-  // Used in the hero — first impression, short and confident
-  heroBio: 'I build things that work and feel right — a CS student who goes beyond the classroom, shipping real products and solving real problems.',
-
-  // Used in About — deeper, reflects academic + hands-on balance
+  name:     'Brevian Emmanuel',
+  location: 'Kibabii University, Kenya',
+  email:    'brivian179@gmail.com',
+  phone:    '+254 727 611 362',
+  whatsapp: '254727611362',
+  github:   'brave-0001',
+  heroBio:  'I build things that work and feel right — a CS student who goes beyond the classroom, shipping real products and solving real problems.',
   aboutBio: 'Computer Science grounds my thinking. Curiosity drives everything else. I combine structured academic knowledge with hands-on building — because the best way to understand something is to make it work.',
 };
 
@@ -64,7 +60,6 @@ const details = [
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 
-// Shared SVG wrapper — keeps icon declarations to a single line each
 const Icon = ({ children }) => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
     stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -77,29 +72,24 @@ const PhoneIcon  = () => <Icon><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79
 const GithubIcon = () => <Icon><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></Icon>;
 
 const ArrowIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 16 16" fill="none"
+  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"
     stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M3 8h10M8 3l5 5-5 5"/>
   </svg>
 );
 
-// ─── Hooks ────────────────────────────────────────────────────────────────────
+// ─── Hook ─────────────────────────────────────────────────────────────────────
 
-function useInView(threshold = 0.12) {
+function useInView(threshold = 0.1) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setVisible(true);
-        observer.disconnect();
-      }
+      if (entry.isIntersecting) { setVisible(true); observer.disconnect(); }
     }, { threshold });
-
     observer.observe(el);
     return () => observer.disconnect();
   }, [threshold]);
@@ -113,18 +103,15 @@ function Reveal({ children, delay = 0, className = '' }) {
   const [ref, visible] = useInView();
   const classes = ['reveal', visible && 'revealed', className].filter(Boolean).join(' ');
   const style = delay ? { transitionDelay: `${delay}ms` } : undefined;
-
   return <div ref={ref} className={classes} style={style}>{children}</div>;
 }
 
 function ContactCard({ href, icon, label, value, highlight = false }) {
   const isExternal = !href.startsWith('mailto');
-  const cls = `contact-card${highlight ? ' contact-card--highlight' : ''}`;
-
   return (
     <a
       href={href}
-      className={cls}
+      className={`contact-card${highlight ? ' contact-card--highlight' : ''}`}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
     >
@@ -138,34 +125,28 @@ function ContactCard({ href, icon, label, value, highlight = false }) {
   );
 }
 
-// ─── Image fallbacks (shown when profile/about images fail to load) ────────────
-
-const FALLBACK_HERO  = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='480'%3E%3Crect fill='%23052659' width='400' height='480'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%237DA0CA' font-size='96' font-family='Georgia'%3EBE%3C/text%3E%3C/svg%3E";
-const FALLBACK_ABOUT = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect fill='%23052659' width='400' height='500'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%237DA0CA' font-size='80' font-family='serif'%3EBE%3C/text%3E%3C/svg%3E";
+const FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect fill='%23052659' width='400' height='500'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%237DA0CA' font-size='96' font-family='Georgia'%3EBE%3C/text%3E%3C/svg%3E";
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 
 export default function Portfolio() {
-  const [dark,    setDark]    = useState(() => localStorage.getItem('darkMode') === 'true');
+  const [dark, setDark]        = useState(() => localStorage.getItem('darkMode') === 'true');
   const [scrolled, setScrolled] = useState(false);
+  const pub = process.env.PUBLIC_URL;
+
+  useEffect(() => { localStorage.setItem('darkMode', dark); }, [dark]);
 
   useEffect(() => {
-    localStorage.setItem('darkMode', dark);
-  }, [dark]);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const pub = process.env.PUBLIC_URL;
-
   return (
     <div className={`app${dark ? ' dark' : ''}`}>
 
-      {/* ── Navigation ─────────────────────────────────────────────────────── */}
-      <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
+      {/* ── Nav ────────────────────────────────────────────────────────────── */}
+      <header className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
         <div className="nav__inner">
 
           <a href="#home" className="nav__logo">
@@ -178,25 +159,29 @@ export default function Portfolio() {
             <span className="nav__name">Brevian</span>
           </a>
 
-          <nav className="nav__links">
+          <nav className="nav__links" aria-label="Main navigation">
             {['Tech', 'Projects', 'About', 'Contact'].map(label => (
-              <a key={label} href={`#${label.toLowerCase()}`} className="nav__link">
-                {label}
-              </a>
+              <a key={label} href={`#${label.toLowerCase()}`} className="nav__link">{label}</a>
             ))}
           </nav>
 
-          <button className="nav__toggle" onClick={() => setDark(d => !d)} aria-label="Toggle theme">
-            {dark ? <Sun size={17} /> : <Moon size={17} />}
+          <button
+            className="nav__toggle"
+            onClick={() => setDark(d => !d)}
+            aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            <span className="toggle-track">
+              <span className="toggle-thumb">
+                {dark ? <Sun size={12} /> : <Moon size={12} />}
+              </span>
+            </span>
           </button>
 
         </div>
-      </nav>
+      </header>
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
       <section id="home" className="hero">
-        <div className="hero__glow" aria-hidden="true" />
-
         <div className="container hero__inner">
 
           <div className="hero__text">
@@ -204,7 +189,7 @@ export default function Portfolio() {
             <h1 className="hero__heading">
               <span className="hero__line">Built by</span>
               <span className="hero__line hero__line--name">Brevian.</span>
-              <span className="hero__line hero__line--accent">Made to last.</span>
+              <span className="hero__line hero__line--italic">Made to last.</span>
             </h1>
             <p className="hero__sub">{person.heroBio}</p>
             <div className="hero__cta">
@@ -220,17 +205,29 @@ export default function Portfolio() {
             </div>
           </div>
 
-          <div className="hero__photo-wrap">
-            <div className="hero__photo-ring" aria-hidden="true" />
-            <img
-              src={`${pub}/About.jpg`}
-              alt="Brevian Emmanuel"
-              className="hero__photo"
-              onError={e => { e.target.src = FALLBACK_HERO; }}
-            />
+          <div className="hero__visual">
+            <div className="hero__photo-frame">
+              <img
+                src={`${pub}/Profile.jpeg`}
+                alt="Brevian Emmanuel"
+                className="hero__photo"
+                onError={e => { e.target.src = FALLBACK; }}
+              />
+            </div>
+
             <div className="hero__badge">
               <span className="hero__badge-dot" aria-hidden="true" />
               Available for work
+            </div>
+
+            <div className="hero__stat hero__stat--tl">
+              <span className="hero__stat-num">{projects.length}+</span>
+              <span className="hero__stat-label">Projects</span>
+            </div>
+
+            <div className="hero__stat hero__stat--br">
+              <span className="hero__stat-num">{stack.reduce((n, c) => n + c.techs.length, 0)}+</span>
+              <span className="hero__stat-label">Technologies</span>
             </div>
           </div>
 
@@ -244,47 +241,43 @@ export default function Portfolio() {
       {/* ── Tech Stack ─────────────────────────────────────────────────────── */}
       <section id="tech" className="section">
         <div className="container">
-          <Reveal><p className="label">Expertise</p></Reveal>
+          <Reveal><span className="label">Expertise</span></Reveal>
           <Reveal delay={80}><h2 className="section__title">Tech Stack</h2></Reveal>
-          <Reveal delay={150}>
-            <p className="section__sub">
-              Every tool chosen with purpose. Every skill earned through building something real.
-            </p>
+          <Reveal delay={140}>
+            <p className="section__sub">Every tool chosen with purpose. Every skill earned through building something real.</p>
           </Reveal>
 
-          <div className="tech-grid">
-            {stack.map((cat, i) => (
-              <Reveal key={cat.title} delay={i * 70}>
-                <div className="tech-card">
+          <Reveal delay={200}>
+            <div className="tech-grid">
+              {stack.map(cat => (
+                <div key={cat.title} className="tech-card">
                   <p className="tech-card__label">{cat.title}</p>
                   <div className="tech-card__items">
                     {cat.techs.map(t => <span key={t} className="tech-pill">{t}</span>)}
                   </div>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── Projects ───────────────────────────────────────────────────────── */}
       <section id="projects" className="section section--alt">
         <div className="container">
-          <Reveal><p className="label">Work</p></Reveal>
+          <Reveal><span className="label">Work</span></Reveal>
           <Reveal delay={80}><h2 className="section__title">Things I've Built</h2></Reveal>
 
           <div className="projects-list">
             {projects.map((project, i) => (
-              <Reveal key={project.title} delay={i * 100}>
+              <Reveal key={project.title} delay={i * 90}>
                 <div className="project-row">
-
                   <div className="project-row__meta">
                     <span className="project-row__year">{project.year}</span>
                     <span className={`project-row__status ${project.status === 'Live' ? 'status--live' : 'status--dev'}`}>
                       {project.status}
                     </span>
                   </div>
-
                   <div className="project-row__body">
                     <h3 className="project-row__title">{project.title}</h3>
                     <p className="project-row__desc">{project.description}</p>
@@ -292,19 +285,11 @@ export default function Portfolio() {
                       {project.technologies.map(t => <span key={t} className="tag">{t}</span>)}
                     </div>
                   </div>
-
                   {project.status === 'Live' && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-row__link"
-                    >
-                      <span>View</span>
-                      <ArrowIcon />
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-row__link">
+                      <span>View</span><ArrowIcon />
                     </a>
                   )}
-
                 </div>
               </Reveal>
             ))}
@@ -318,11 +303,11 @@ export default function Portfolio() {
           <div className="about-grid">
 
             <div className="about-left">
-              <Reveal><p className="label">The Person</p></Reveal>
+              <Reveal><span className="label">The Person</span></Reveal>
               <Reveal delay={80}><h2 className="section__title">Who I Am</h2></Reveal>
-              <Reveal delay={160}><p className="about__bio">{person.aboutBio}</p></Reveal>
+              <Reveal delay={150}><p className="about__bio">{person.aboutBio}</p></Reveal>
 
-              <Reveal delay={240}>
+              <Reveal delay={220}>
                 <div className="about__details">
                   {details.map(([key, val]) => (
                     <div key={key} className="about__row">
@@ -333,13 +318,8 @@ export default function Portfolio() {
                 </div>
               </Reveal>
 
-              <Reveal delay={320}>
-                <a
-                  href={`https://github.com/${person.github}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn--primary"
-                >
+              <Reveal delay={300}>
+                <a href={`https://github.com/${person.github}`} target="_blank" rel="noopener noreferrer" className="btn btn--primary">
                   See My Code
                 </a>
               </Reveal>
@@ -348,10 +328,10 @@ export default function Portfolio() {
             <Reveal delay={180} className="about-right">
               <div className="about__img-wrap">
                 <img
-                  src={`${pub}/About.jpg`}
+                  src={`${pub}/me.jpg`}
                   alt="Brevian Emmanuel"
                   className="about__img"
-                  onError={e => { e.target.src = FALLBACK_ABOUT; }}
+                  onError={e => { e.target.src = FALLBACK; }}
                 />
               </div>
             </Reveal>
@@ -366,38 +346,22 @@ export default function Portfolio() {
           <div className="contact-grid">
 
             <div className="contact-left">
-              <Reveal><p className="label">Contact</p></Reveal>
+              <Reveal><span className="label">Contact</span></Reveal>
               <Reveal delay={80}><h2 className="section__title">Let's Build<br />Something Real.</h2></Reveal>
-              <Reveal delay={160}>
+              <Reveal delay={140}>
                 <p className="section__sub">Got an idea, a role, or a problem worth solving? I'm ready.</p>
               </Reveal>
 
-              <Reveal delay={240}>
+              <Reveal delay={220}>
                 <div className="contact-cards">
-                  <ContactCard
-                    href={`mailto:${person.email}`}
-                    icon={<MailIcon />}
-                    label="Email"
-                    value={person.email}
-                  />
-                  <ContactCard
-                    href={`https://wa.me/${person.whatsapp}`}
-                    icon={<PhoneIcon />}
-                    label="Phone · WhatsApp"
-                    value={person.phone}
-                    highlight
-                  />
-                  <ContactCard
-                    href={`https://github.com/${person.github}`}
-                    icon={<GithubIcon />}
-                    label="GitHub"
-                    value={`@${person.github}`}
-                  />
+                  <ContactCard href={`mailto:${person.email}`}                    icon={<MailIcon />}   label="Email"           value={person.email}            />
+                  <ContactCard href={`https://wa.me/${person.whatsapp}`}          icon={<PhoneIcon />}  label="Phone · WhatsApp" value={person.phone} highlight  />
+                  <ContactCard href={`https://github.com/${person.github}`}       icon={<GithubIcon />} label="GitHub"          value={`@${person.github}`}     />
                 </div>
               </Reveal>
             </div>
 
-            <Reveal delay={200} className="contact-right">
+            <Reveal delay={180} className="contact-right">
               <div className="contact__video-wrap">
                 <video
                   src={`${pub}/work.mp4`}
