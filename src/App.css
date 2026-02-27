@@ -303,6 +303,10 @@ header.nav.nav--scrolled {
   animation: fadeIn 1s 0.5s forwards;
 }
 
+.hero__photo-wrap {
+  position: relative;
+}
+
 .hero__photo-frame {
   border-radius: 24px;
   overflow: hidden;
@@ -347,7 +351,7 @@ header.nav.nav--scrolled {
   animation: pulse 2.5s ease-in-out infinite;
 }
 
-/* Floating stat chips — auto-computed from data */
+/* Floating stat chips — desktop */
 .hero__stat {
   position: absolute;
   display: flex;
@@ -378,6 +382,11 @@ header.nav.nav--scrolled {
   font-weight: 500;
   color: var(--muted);
   white-space: nowrap;
+}
+
+/* Inline stats row — mobile only, hidden on desktop */
+.hero__stats-row {
+  display: none;
 }
 
 /* Scroll hint */
@@ -933,6 +942,26 @@ header.nav.nav--scrolled {
   .hero__sub    { max-width: 100%; }
   .hero__visual { order: 1; max-width: 300px; margin: 0 auto; }
   .hero__stat   { display: none; }
+
+  /* Show the inline row beneath the photo on mobile */
+  .hero__stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .hero__stat-inline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 10px 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--c-700) 8%, transparent);
+  }
 
   .tech-grid { grid-template-columns: repeat(2, 1fr); }
 

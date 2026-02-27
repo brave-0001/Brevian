@@ -206,28 +206,43 @@ export default function Portfolio() {
           </div>
 
           <div className="hero__visual">
-            <div className="hero__photo-frame">
-              <img
-                src={`${pub}/Profile.jpeg`}
-                alt="Brevian Emmanuel"
-                className="hero__photo"
-                onError={e => { e.target.src = FALLBACK; }}
-              />
+            <div className="hero__photo-wrap">
+              <div className="hero__photo-frame">
+                <img
+                  src={`${pub}/Profile.jpeg`}
+                  alt="Brevian Emmanuel"
+                  className="hero__photo"
+                  onError={e => { e.target.src = FALLBACK; }}
+                />
+              </div>
+
+              <div className="hero__badge">
+                <span className="hero__badge-dot" aria-hidden="true" />
+                Available for work
+              </div>
+
+              {/* Floating chips — desktop only, positioned relative to photo */}
+              <div className="hero__stat hero__stat--tl">
+                <span className="hero__stat-num">{projects.length}+</span>
+                <span className="hero__stat-label">Projects</span>
+              </div>
+
+              <div className="hero__stat hero__stat--br">
+                <span className="hero__stat-num">{stack.reduce((n, c) => n + c.techs.length, 0)}+</span>
+                <span className="hero__stat-label">Technologies</span>
+              </div>
             </div>
 
-            <div className="hero__badge">
-              <span className="hero__badge-dot" aria-hidden="true" />
-              Available for work
-            </div>
-
-            <div className="hero__stat hero__stat--tl">
-              <span className="hero__stat-num">{projects.length}+</span>
-              <span className="hero__stat-label">Projects</span>
-            </div>
-
-            <div className="hero__stat hero__stat--br">
-              <span className="hero__stat-num">{stack.reduce((n, c) => n + c.techs.length, 0)}+</span>
-              <span className="hero__stat-label">Technologies</span>
+            {/* Inline stats row — mobile only */}
+            <div className="hero__stats-row">
+              <div className="hero__stat-inline">
+                <span className="hero__stat-num">{projects.length}+</span>
+                <span className="hero__stat-label">Projects</span>
+              </div>
+              <div className="hero__stat-inline">
+                <span className="hero__stat-num">{stack.reduce((n, c) => n + c.techs.length, 0)}+</span>
+                <span className="hero__stat-label">Technologies</span>
+              </div>
             </div>
           </div>
 
