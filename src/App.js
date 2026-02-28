@@ -49,6 +49,14 @@ const projects = [
     status:       'In Development',
     year:         '2025',
   },
+  {
+  title:        'LumioBooks',
+  description:  'Free knowledge for everyone. A curated digital library where readers browse, read online, and download PDF books across all categories — zero barriers, zero cost.',
+  technologies: ['React', 'Node.js', 'MongoDB'],
+  link:         'https://lumio-books-yuoj.vercel.app',
+  status:       'Live',
+  year:         '2026',
+},
 ];
 
 const details = [
