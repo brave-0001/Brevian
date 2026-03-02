@@ -25,13 +25,21 @@ const stack = [
 ];
 
 const projects = [
+    {
+  title:        'Welfare Community Group',
+  description:  'A minimalist, student-centered web platform designed to foster community support and financial wellbeing. The app allows members to request micro-loans, join a collaborative WhatsApp group, and access transparent profiles of founders and community leaders. Built with clean design, intuitive navigation, and subtle Apple-style aesthetics, it emphasizes clarity, trust, and meaningful engagement for every student.',
+  technologies: ['React', 'Node.js', 'MongoDB'],
+  link:         'https://welfare-neon.vercel.app/',
+  status:       'Live',
+  year:         '2026',
+},
   {
     title:        'Life-Course Learning',
     description:  'Knowledge should be free. This e-library makes it happen — curated books, zero barriers, and a request system so readers always find what they need.',
     technologies: ['React', 'Node.js', 'MongoDB'],
     link:         'https://life-course-learning.vercel.app',
     status:       'Live',
-    year:         '2024',
+    year:         '2025',
   },
   {
     title:        'SecondMarket',
