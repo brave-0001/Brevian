@@ -27,7 +27,7 @@ const stack = [
 const projects = [
     {
   title:        'Welfare Community Group',
-  description:  'A minimalist, student-centered web platform designed to foster community support and financial wellbeing. The app allows members to request micro-loans, join a collaborative WhatsApp group, and access transparent profiles of founders and community leaders. Built with clean design, intuitive navigation, and subtle Apple-style aesthetics, it emphasizes clarity, trust, and meaningful engagement for every student.',
+  description:  'A minimalist platform for students to request micro-loans, join the community, and connect with leaders, built with clarity, trust, and elegant design.',
   technologies: ['React', 'Node.js', 'MongoDB'],
   link:         'https://welfare-neon.vercel.app/',
   status:       'Live',
